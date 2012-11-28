@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://document.jaxws.ws.techiekernel.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://document.jaxws.ws.techiekernel.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://document.jaxws.ws.techiekernel.com">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://document.jaxws.ws.techiekernel.com/xsd">
+            <xs:complexType name="Server">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mac" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="os" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://document.jaxws.ws.techiekernel.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://document.jaxws.ws.techiekernel.com">
+            <xs:import namespace="http://document.jaxws.ws.techiekernel.com/xsd"/>
+            <xs:element name="callFooBar">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="callFooBarResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getServerDetail">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="client" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getServerDetailResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax22:Server"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getServerDetailRequest">
+        <wsdl:part name="parameters" element="ns:getServerDetail"/>
+    </wsdl:message>
+    <wsdl:message name="getServerDetailResponse">
+        <wsdl:part name="parameters" element="ns:getServerDetailResponse"/>
+    </wsdl:message>
+    <wsdl:message name="callFooBarRequest">
+        <wsdl:part name="parameters" element="ns:callFooBar"/>
+    </wsdl:message>
+    <wsdl:message name="callFooBarResponse">
+        <wsdl:part name="parameters" element="ns:callFooBarResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="FooBarImplServicePortType">
+        <wsdl:operation name="getServerDetail">
+            <wsdl:input message="ns:getServerDetailRequest" wsaw:Action="urn:getServerDetail"/>
+            <wsdl:output message="ns:getServerDetailResponse" wsaw:Action="urn:getServerDetailResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="callFooBar">
+            <wsdl:input message="ns:callFooBarRequest" wsaw:Action="urn:callFooBar"/>
+            <wsdl:output message="ns:callFooBarResponse" wsaw:Action="urn:callFooBarResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="FooBarImplServiceSoap11Binding" type="ns:FooBarImplServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getServerDetail">
+            <soap:operation soapAction="urn:getServerDetail" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="callFooBar">
+            <soap:operation soapAction="urn:callFooBar" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="FooBarImplServiceSoap12Binding" type="ns:FooBarImplServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getServerDetail">
+            <soap12:operation soapAction="urn:getServerDetail" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="callFooBar">
+            <soap12:operation soapAction="urn:callFooBar" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="FooBarImplServiceHttpBinding" type="ns:FooBarImplServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getServerDetail">
+            <http:operation location="FooBarImplService/getServerDetail"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getServerDetail"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getServerDetail"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="callFooBar">
+            <http:operation location="FooBarImplService/callFooBar"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="callFooBar"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="callFooBar"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="FooBarImplService">
+        <wsdl:port name="FooBarImplServiceHttpSoap11Endpoint" binding="ns:FooBarImplServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/FooBarImpl"/>
+        </wsdl:port>
+        <wsdl:port name="FooBarImplServiceHttpSoap12Endpoint" binding="ns:FooBarImplServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/FooBarImpl"/>
+        </wsdl:port>
+        <wsdl:port name="FooBarImplServiceHttpEndpoint" binding="ns:FooBarImplServiceHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/FooBarImpl"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

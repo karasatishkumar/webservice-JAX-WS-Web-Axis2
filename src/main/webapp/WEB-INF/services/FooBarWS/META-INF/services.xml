@@ -1,0 +1,14 @@
+<serviceGroup>
+	<service name="FooBarWsDocument" targetNamespace="http://document.jaxws.ws.techiekernel.com/">>
+		<description>FooBarWsDocument</description>
+		<schema schemaNamespace="http://document.jaxws.ws.techiekernel.com/" />
+		<parameter name="FooBarWsDocument" locked="false">com.techiekernel.ws.jaxws.document.FooBarImpl
+		</parameter>
+		<operation name="callFooBar">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="getServerDetail">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+	</service>
+</serviceGroup>
