@@ -9,6 +9,12 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>axis2</artifactId>
 			<version>1.5.4</version>
@@ -33,75 +39,65 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.0.2</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.axis2</groupId>
-				<artifactId>axis2-java2wsdl-maven-plugin</artifactId>
-				<version>1.5.4</version>
-				<executions>
-					<execution>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>java2wsdl</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<className>com.techiekernel.ws.jaxws.document.FooBarImpl</className>
-					<outputFileName>src/main/webapp/FooBarWS.wsdl</outputFileName>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.axis2</groupId>
-				<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
-				<version>1.5.4</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>wsdl2code</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<classpathElements>${project.build.outputDirectory}</classpathElements>
-					<wsdlFile>src/main/webapp/FooBarWS.wsdl</wsdlFile>
-					<databindingName>xmlbeans</databindingName>
-					<packageName>webservice-JAX-WS-Web-Axis2.ws</packageName>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${project.build.directory}/webservice-JAX-WS-Web-Axis2/wsdl2code/src</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+			<plugins>
+				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
+					<version>2.0.2</version> </plugin> <plugin> <artifactId>maven-compiler-plugin</artifactId> 
+					<version>2.5.1</version> <configuration> <source>1.6</source> <target>1.6</target> 
+					</configuration> </plugin> -->
+				<!-- <plugin>
+					<groupId>org.apache.axis2</groupId>
+					<artifactId>axis2-java2wsdl-maven-plugin</artifactId>
+					<version>1.5.4</version>
+					<executions>
+						<execution>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>java2wsdl</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<className>com.techiekernel.ws.jaxws.document.FooBarImpl</className>
+						<outputFileName>src/main/webapp/FooBarImpl.wsdl</outputFileName>
+					</configuration>
+				</plugin> -->
+				<plugin>
+					<groupId>org.apache.axis2</groupId>
+					<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
+					<version>1.5.4</version>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>wsdl2code</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<classpathElements>${project.build.outputDirectory}</classpathElements>
+						<wsdlFile>src/main/webapp/FooBarImpl.wsdl</wsdlFile>
+						<databindingName>xmlbeans</databindingName>
+						<packageName>com.techiekernel.ws.jaxws.document</packageName>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>${project.build.directory}/webservice-JAX-WS-Web-Axis2/wsdl2code/src</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
 		<finalName>webservice-JAX-WS-Web-Axis2</finalName>
 	</build>
 </project>
